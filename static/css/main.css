@@ -1,0 +1,387 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Unbounded:wght@600&display=swap");
+
+
+:root {
+  --background-color: #ffffff;
+  --element-color: #eeeeee;
+  --element-hover-color: #dddddd;
+  --border-color: #cccccc;
+  --shading-color: #000000aa;;
+
+  --text-color: #000000;
+
+  --orange-color: #fa7f1b;
+  --orange-background-color: #fa7f1b25;
+  --orange-background-active-color: #fa7f1b50;
+
+  --blue-color: #8f7ee7;
+  --blue-background-color: #8f7ee725;
+  --blue-background-active-color: #8f7ee750;
+
+  --border-margin: 50px;
+  --interblock-margin: 25px;
+
+  --border-width: 2px;
+  --border-style: solid;
+  --border: var(--border-width) var(--border-style) var(--border-color);
+
+  --book-padding: 20px;
+  --book-border-radius: var(--book-padding);
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: "Montserrat", sans-serif;
+}
+
+
+body::-webkit-scrollbar {
+  width: 1vw;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--background-color);
+  width: 1vw;
+  transition: all 0.3s
+}
+
+body.popup::-webkit-scrollbar-track {
+  background: var(--shading-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+}
+
+body.popup::-webkit-scrollbar-thumb {
+  background: var(--shading-color);
+}
+
+
+::-webkit-selection {
+  background: var(--blue-color);
+}
+
+::-ms-selection {
+  background: var(--blue-color);
+}
+
+::selection {
+  background: var(--blue-color);
+}
+
+::-moz-selection {
+  background: var(--blue-color);
+}
+
+::-o-selection {
+  background: var(--blue-color);
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Unbounded", sans-serif;
+}
+
+
+.no-drag,
+.no-select {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.no-drag {
+  user-drag: none;
+  -webkit-user-drag: none;
+}
+
+
+main .popup {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--shading-color);
+  transition: all 0.3s;
+}
+
+body.popup main .popup {
+  display: flex;
+}
+
+main .popup img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+
+main .cover {
+  margin: var(--border-margin) var(--border-margin) var(--interblock-margin);
+  transition: all 0.5s;
+}
+
+/* SETTINGS */
+
+main .settings {
+  margin: 0 var(--border-margin) var(--interblock-margin);
+  display: flex;
+  gap: 15px;
+  transition: all 0.5s;
+}
+
+main .setting {
+  display: flex;
+  gap: 15px;
+  min-width: max-content;
+}
+
+
+main .settings .setting span {
+  padding: 5px 10px 5px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+main .settings .setting span.active,
+main .settings .setting span.active:active {
+  background: none;
+  padding: 5px 0 5px;
+  cursor: default;
+}
+
+
+main .sort {
+  border-radius: 15px;
+}
+
+main .sort.date {
+  color: var(--orange-color);
+  background: var(--orange-background-color);
+}
+
+main .sort.date:active {
+  background: var(--orange-background-active-color);
+}
+
+main .sort.alphabet {
+  color: var(--blue-color);
+  background: var(--blue-background-color);
+}
+
+main .sort.alphabet:active {
+  background: var(--blue-background-active-color);
+}
+
+
+main .view {
+  background: var(--element-color);
+  border-radius: 10px;
+}
+
+main .view:active {
+  background: var(--element-hover-color);
+}
+
+
+main .books {
+  margin: 0 var(--border-margin) var(--border-margin);
+  display: flex;
+  gap: var(--interblock-margin);
+  transition: all 0.5s;
+}
+
+main .books .book {
+  min-width: min-content;
+  background: var(--element-color);
+  padding: var(--book-padding);
+  border-radius: var(--book-border-radius);
+}
+
+/* TABLE VIEW */
+
+main .books.table {
+  flex-wrap: wrap;
+}
+
+main .books.table .book {
+  display: flex;
+  gap: var(--book-padding);
+  width: calc(((100% - var(--interblock-margin)) / 2) - (var(--book-padding) * 2));
+  transition: all 0.5s;
+}
+
+main .books.table .book img {
+  max-width: 250px;
+  max-height: 250px;
+  border-radius: 10px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+main .books.table .book .details {
+  margin: 10px 0;
+}
+
+/* LIST VIEW */
+
+main .books.list,
+main .books.compact {
+  flex-direction: column;
+}
+
+main .books.list .book img,
+main .books.compact .book img {
+  display: none;
+}
+
+main .books.list .book .details {
+  display: flex;
+  gap: 10px;
+}
+
+main .books.list .book .details > * + * {
+  padding-left: 10px;
+  border-left: var(--border);
+}
+
+/* COMPACT VIEW */
+
+main .books.compact {
+  gap: 0;
+}
+
+main .books.compact .book {
+  border-radius: 0;
+  background: none;
+  padding: 5px 0 5px;
+}
+
+main .books.compact .book:first-of-type {
+  padding-top: 0;
+}
+
+main .books.compact .book + .book {
+  border-top: var(--border);
+}
+
+main .books.compact .book .details {
+  display: none;
+}
+
+
+/* ADAPTIVITY */
+
+
+@media screen and (min-width: 1600px) {
+  main .setting + .setting {
+    border-left: var(--border);
+    padding-left: 15px;
+  }
+
+  main .books.table .book {
+    width: calc(((100% - var(--interblock-margin) * 2) / 3) - (20px * 2));
+  }
+}
+
+@media screen and (min-width: 1100px) and (max-width: 1600px) {
+  main .setting + .setting {
+    border-left: var(--border);
+    padding-left: 15px;
+  }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1100px) {
+  main .setting + .setting {
+    border-left: var(--border);
+    padding-left: 15px;
+  }
+
+  main .books.table .book {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+  main .settings {
+    flex-direction: column;
+  }
+
+  main .books.table .book {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 450px) and (max-width: 600px) {
+  :root {
+    --border-margin: 25px;
+  }
+
+  main .settings {
+    flex-direction: column;
+  }
+
+  main .books.table .book {
+    width: 100%;
+  }
+
+  main .books.table .book img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  :root {
+    --border-margin: 15px;
+  }
+
+  main .settings {
+    flex-direction: column;
+  }
+
+  main .books.table {
+    gap: 15px;
+  }
+
+  main .books.table .book {
+    background: none;
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+    gap: 15px;
+  }
+
+  main .books.table .book + .book {
+    border-top: var(--border);
+    padding-top: 15px;
+  }
+
+  main .books.table .book img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  main .books.list {
+    gap: 15px;
+  }
+
+  main .books.list .book {
+    padding: 15px;
+    gap: 15px;
+  }
+}

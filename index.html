@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+
+  <title>Моя литература</title>
+
+  <link rel="icon" href="static/img/icon.png">
+
+  <link href="static/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <main>
+    <div class="popup" onclick="closePopup()">
+      <img class="no-drag" src="static/img/Капитанская дочка.png">
+    </div>
+
+    <div class="cover">
+      <h1>Моя литература</h1>
+      <p>Перечень книг для&nbsp;прочтения и управления&nbsp;ими</p>
+    </div>
+
+    <div class="settings no-select">
+      <div class="setting">
+        <span class="sort alphabet" onclick="sortByAlphabet(books)">По&nbsp;алфавиту</span>
+        <span class="sort date" onclick="sortByDate(books)">По&nbsp;дате получения</span>
+      </div>
+
+      <div class="setting">
+        <span class="view table" onclick="setTableView()">Таблица</span>
+        <span class="view list" onclick="setListView()">Список</span>
+        <span class="view compact" onclick="setCompactView()">Компактно</span>
+      </div>
+    </div>
+
+    <div class="books table"></div>
+  </main>
+
+  <script src="static/js/books.js"></script>
+  <script src="static/js/format-date.js"></script>
+  <script src="static/js/manage-books-view.js"></script>
+  <script src="static/js/managePopup.js"></script>
+  <script src="static/js/render-books.js"></script>
+  <script src="static/js/sort-books.js"></script>
+  <script>
+    let body = document.body;
+    let booksContainer = document.querySelector("main .books");
+    let tableViewButton = document.querySelector("main .view.table");
+    let listViewButton = document.querySelector("main .view.list");
+    let compactViewButton = document.querySelector("main .view.compact");
+    let popupImage = document.querySelector("main .popup img");
+
+    renderBooks(books);
+    setTableView();
+  </script>
+</body>
+
+</html>
