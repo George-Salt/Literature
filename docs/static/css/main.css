@@ -27,6 +27,8 @@
 
   --book-padding: 20px;
   --book-border-radius: var(--book-padding);
+  --books-in-row: 2;
+  --book-with-padding-in-row-width: calc(((100% - var(--interblock-margin) * (var(--books-in-row) - 1)) / var(--books-in-row)) - (var(--book-padding) * 2));
 }
 
 
@@ -42,45 +44,29 @@ body {
 }
 
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+body::-webkit-scrollbar-track {
   width: 1vw;
 }
 
 body::-webkit-scrollbar-track {
   background: var(--background-color);
-  width: 1vw;
-  transition: all 0.3s
-}
-
-body.popup::-webkit-scrollbar-track {
-  background: var(--shading-color);
 }
 
 body::-webkit-scrollbar-thumb {
   background: var(--border-color);
 }
 
+body.popup::-webkit-scrollbar-track,
 body.popup::-webkit-scrollbar-thumb {
   background: var(--shading-color);
 }
 
 
-::-webkit-selection {
-  background: var(--blue-color);
-}
-
-::-ms-selection {
-  background: var(--blue-color);
-}
-
-::selection {
-  background: var(--blue-color);
-}
-
-::-moz-selection {
-  background: var(--blue-color);
-}
-
+::-webkit-selection,
+::-ms-selection,
+::selection,
+::-moz-selection,
 ::-o-selection {
   background: var(--blue-color);
 }
@@ -104,18 +90,40 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-user-drag: none;
 }
 
+.row, .column, .center {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+
+main .popup,
+main .cover,
+main .settings,
+main .settings .setting span,
+main .books,
+main .books.table .book,
+main .books.table .book img {
+  transition: all 0.3s;
+}
+
+/* POPUP */
 
 main .popup {
   display: none;
-  align-items: center;
-  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: var(--shading-color);
-  transition: all 0.3s;
 }
 
 body.popup main .popup {
@@ -126,26 +134,29 @@ main .popup img {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 20px;
-  transition: all 0.3s;
 }
 
+/* BLOCK */
 
-main .cover {
+main .block {
+  margin: 0 var(--border-margin) var(--interblock-margin);
+}
+
+main .block:first-of-type {
   margin: var(--border-margin) var(--border-margin) var(--interblock-margin);
-  transition: all 0.5s;
+}
+
+main .block:last-of-type {
+  margin: 0 var(--border-margin) var(--border-margin);
 }
 
 /* SETTINGS */
 
 main .settings {
-  margin: 0 var(--border-margin) var(--interblock-margin);
-  display: flex;
   gap: 15px;
-  transition: all 0.5s;
 }
 
 main .setting {
-  display: flex;
   gap: 15px;
   min-width: max-content;
 }
@@ -153,7 +164,6 @@ main .setting {
 
 main .settings .setting span {
   padding: 5px 10px 5px;
-  transition: all 0.3s;
   cursor: pointer;
 }
 
@@ -198,13 +208,6 @@ main .view:active {
 }
 
 
-main .books {
-  margin: 0 var(--border-margin) var(--border-margin);
-  display: flex;
-  gap: var(--interblock-margin);
-  transition: all 0.5s;
-}
-
 main .books .book {
   min-width: min-content;
   background: var(--element-color);
@@ -219,17 +222,12 @@ main .books.table {
 }
 
 main .books.table .book {
-  display: flex;
   gap: var(--book-padding);
-  width: calc(((100% - var(--interblock-margin)) / 2) - (var(--book-padding) * 2));
-  transition: all 0.5s;
+  width: var(--book-with-padding-in-row-width);
 }
 
 main .books.table .book img {
-  max-width: 250px;
-  max-height: 250px;
   border-radius: 10px;
-  transition: all 0.3s;
   cursor: pointer;
 }
 
@@ -238,16 +236,6 @@ main .books.table .book .details {
 }
 
 /* LIST VIEW */
-
-main .books.list,
-main .books.compact {
-  flex-direction: column;
-}
-
-main .books.list .book img,
-main .books.compact .book img {
-  display: none;
-}
 
 main .books.list .book .details {
   display: flex;
@@ -261,10 +249,6 @@ main .books.list .book .details > * + * {
 
 /* COMPACT VIEW */
 
-main .books.compact {
-  gap: 0;
-}
-
 main .books.compact .book {
   border-radius: 0;
   background: none;
@@ -275,6 +259,10 @@ main .books.compact .book:first-of-type {
   padding-top: 0;
 }
 
+main .books.compact .book:last-of-type {
+  padding-bottom: 0;
+}
+
 main .books.compact .book + .book {
   border-top: var(--border);
 }
@@ -283,65 +271,48 @@ main .books.compact .book .details {
   display: none;
 }
 
+/* COMBINED VIEW */
+
+main .books.list,
+main .books.compact {
+  flex-direction: column;
+}
+
+main .books.list .book img,
+main .books.compact .book img {
+  display: none;
+}
+
+main .books.table,
+main .books.list {
+  gap: var(--interblock-margin);
+}
 
 /* ADAPTIVITY */
 
-
 @media screen and (min-width: 1600px) {
-  main .setting + .setting {
-    border-left: var(--border);
-    padding-left: 15px;
-  }
-
-  main .books.table .book {
-    width: calc(((100% - var(--interblock-margin) * 2) / 3) - (20px * 2));
+  :root {
+    --books-in-row: 3;
   }
 }
 
 @media screen and (min-width: 1100px) and (max-width: 1600px) {
-  main .setting + .setting {
-    border-left: var(--border);
-    padding-left: 15px;
+  :root {
+    --books-in-row: 2;
   }
 }
 
 @media screen and (min-width: 800px) and (max-width: 1100px) {
-  main .setting + .setting {
-    border-left: var(--border);
-    padding-left: 15px;
-  }
 
-  main .books.table .book {
-    width: 100%;
-  }
 }
 
 @media screen and (min-width: 600px) and (max-width: 800px) {
-  main .settings {
-    flex-direction: column;
-  }
 
-  main .books.table .book {
-    width: 100%;
-  }
 }
 
 @media screen and (min-width: 450px) and (max-width: 600px) {
   :root {
     --border-margin: 25px;
-  }
-
-  main .settings {
-    flex-direction: column;
-  }
-
-  main .books.table .book {
-    width: 100%;
-  }
-
-  main .books.table .book img {
-    max-width: 150px;
-    max-height: 150px;
   }
 }
 
@@ -350,20 +321,18 @@ main .books.compact .book .details {
     --border-margin: 15px;
   }
 
-  main .settings {
-    flex-direction: column;
-  }
-
-  main .books.table {
+  main .books.table,
+  main .books.list,
+  main .books.table .book,
+  main .books.list .book {
     gap: 15px;
   }
 
   main .books.table .book {
-    background: none;
     width: 100%;
+    background: none;
     padding: 0;
     border-radius: 0;
-    gap: 15px;
   }
 
   main .books.table .book + .book {
@@ -371,17 +340,42 @@ main .books.compact .book .details {
     padding-top: 15px;
   }
 
+  main .books.list .book {
+    padding: 15px;
+  }
+}
+
+/* COMBINED ADAPTIVITY */
+
+@media screen and (min-width: 800px) {
+  main .setting + .setting {
+    border-left: var(--border);
+    padding-left: 15px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  main .books.table .book img {
+    max-width: 250px;
+    max-height: 250px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  :root {
+    --books-in-row: 1;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  main .settings {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 600px) {
   main .books.table .book img {
     max-width: 150px;
     max-height: 150px;
-  }
-
-  main .books.list {
-    gap: 15px;
-  }
-
-  main .books.list .book {
-    padding: 15px;
-    gap: 15px;
   }
 }

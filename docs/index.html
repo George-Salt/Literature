@@ -14,35 +14,38 @@
 
 <body>
   <main>
-    <div class="popup" onclick="closePopup()">
+    <div class="popup center" onclick="closePopup()">
       <img class="no-drag" src="static/img/Капитанская дочка.png">
     </div>
 
-    <div class="cover">
-      <h1>Моя литература</h1>
-      <p>Перечень книг для&nbsp;прочтения и управления&nbsp;ими</p>
-    </div>
-
-    <div class="settings no-select">
-      <div class="setting">
-        <span class="sort alphabet" onclick="sortByAlphabet(books)">По&nbsp;алфавиту</span>
-        <span class="sort date" onclick="sortByDate(books)">По&nbsp;дате получения</span>
+    <div class="container">
+      <div class="block cover">
+        <h1>Моя литература</h1>
+        <p>Перечень книг для&nbsp;прочтения и управления&nbsp;ими</p>
       </div>
 
-      <div class="setting">
-        <span class="view table" onclick="setTableView()">Таблица</span>
-        <span class="view list" onclick="setListView()">Список</span>
-        <span class="view compact" onclick="setCompactView()">Компактно</span>
-      </div>
-    </div>
+      <div class="block settings no-select row">
+        <div class="setting row">
+          <span class="sort alphabet" onclick="sortByAlphabet(books)">По&nbsp;алфавиту</span>
+          <span class="sort date" onclick="sortByDate(books)">По&nbsp;дате получения</span>
+        </div>
 
-    <div class="books table"></div>
+        <div class="setting row">
+          <span class="view table" onclick="setTableView()">Таблица</span>
+          <span class="view list" onclick="setListView()">Список</span>
+          <span class="view compact" onclick="setCompactView()">Компактно</span>
+        </div>
+      </div>
+
+      <div class="block books row"></div>
+    </div>
+    
   </main>
 
   <script src="static/js/books.js"></script>
   <script src="static/js/format-date.js"></script>
   <script src="static/js/manage-books-view.js"></script>
-  <script src="static/js/managePopup.js"></script>
+  <script src="static/js/manage-popup.js"></script>
   <script src="static/js/render-books.js"></script>
   <script src="static/js/sort-books.js"></script>
   <script>
