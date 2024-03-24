@@ -90,6 +90,7 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-user-drag: none;
 }
 
+
 .row, .column, .center {
   display: flex;
 }
@@ -104,10 +105,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+.button {
+  background: var(--element-color);
+  border-radius: 10px;
+}
+
+.button:active {
+  background: var(--element-hover-color);
+}
+
+
 main .popup,
 main .cover,
 main .settings,
-main .settings .setting span,
+main .settings .setting > div,
+main .filters,
 main .books,
 main .books.table .book,
 main .books.table .book img {
@@ -162,49 +174,91 @@ main .setting {
 }
 
 
-main .settings .setting span {
+main .settings .setting > div {
   padding: 5px 10px 5px;
   cursor: pointer;
 }
 
-main .settings .setting span.active,
-main .settings .setting span.active:active {
+main .settings .setting > div.active,
+main .settings .setting > div.active:active {
   background: none;
   padding: 5px 0 5px;
   cursor: default;
 }
 
 
-main .sort {
+main .settings .sort {
   border-radius: 15px;
 }
 
-main .sort.date {
+main .settings .sort.date {
   color: var(--orange-color);
   background: var(--orange-background-color);
 }
 
-main .sort.date:active {
+main .settings .sort.date:active {
   background: var(--orange-background-active-color);
 }
 
-main .sort.alphabet {
+main .settings .sort.alphabet {
   color: var(--blue-color);
   background: var(--blue-background-color);
 }
 
-main .sort.alphabet:active {
+main .settings .sort.alphabet:active {
   background: var(--blue-background-active-color);
 }
 
 
-main .view {
-  background: var(--element-color);
-  border-radius: 10px;
+main .filters {
+  display: none;
 }
 
-main .view:active {
-  background: var(--element-hover-color);
+main .filters.active {
+  display: flex;
+}
+
+main .filters .column + .column {
+  margin-left: 25px;
+}
+
+main .filters .checkbox {
+  width: max-content;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+main .filters .checkbox > input {
+  position: absolute;
+  opacity: 0;
+}
+
+main .filters .checkbox > span {
+  display: flex;
+  align-items: center;
+}
+
+main .filters .checkbox > span::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: var(--border);
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+main .filters .checkbox > input:not(:checked) + span:hover::before,
+main .filters .checkbox > input:active + span::before {
+  border-color: var(--blue-color);
+}
+
+main .filters .checkbox > input:active + span::before {
+  background: var(--element-color);
+}
+
+main .filters .checkbox > input:checked + span::before {
+  border-color: var(--blue-color);
+  background: var(--blue-color);
 }
 
 
@@ -302,14 +356,6 @@ main .books.list {
   }
 }
 
-@media screen and (min-width: 800px) and (max-width: 1100px) {
-
-}
-
-@media screen and (min-width: 600px) and (max-width: 800px) {
-
-}
-
 @media screen and (min-width: 450px) and (max-width: 600px) {
   :root {
     --border-margin: 25px;
@@ -347,7 +393,7 @@ main .books.list {
 
 /* COMBINED ADAPTIVITY */
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
   main .setting + .setting {
     border-left: var(--border);
     padding-left: 15px;
@@ -367,7 +413,7 @@ main .books.list {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   main .settings {
     flex-direction: column;
   }

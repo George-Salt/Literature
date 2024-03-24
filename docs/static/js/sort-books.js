@@ -1,43 +1,46 @@
 
-function sortByAlphabet(books) {
-  let names = [];
-  books.forEach(book => {
-    names.push(book.name);
-  });
-  let sortedNames = names.sort();
+function sortByParameter(bookParameter) {
+  let booksToSort = books;
+  if (booksByFilters.length > 0) {
+    booksToSort = booksByFilters;
+  };
 
+  let values = [];
   let sortedBooks = [];
-  sortedNames.forEach(name => {
-    books.forEach(book => {
-      if (book.name == name) {
-        sortedBooks.push(book);
-      };
+  if (bookParameter == "name") {
+    sortedMethod = "name";
+
+    booksToSort.forEach(book => {
+      values.push(book.name);
     });
-  });
+    let sortedValues = values.sort();
 
-  renderBooks(sortedBooks);
-};
+    sortedValues.forEach(value => {
+      booksToSort.forEach(book => {
+        if (book.name == value) {
+          sortedBooks.push(book);
+        };
+      });
+    });
+  } else if (bookParameter == "date") {
+    sortedMethod = "date";
 
-
-function sortByDate(books) {
-  let dates = [];
-  books.forEach(book => {
-    let days = formatDays(book.date);
-    let months = formatMonths(book.date);
-    dates.push(`${book.date.getFullYear()}.${months}.${days}`);
-  });
-  let sortedDates = dates.sort();
-
-  let sortedBooks = [];
-  sortedDates.forEach(date => {
-    books.forEach(book => {
+    booksToSort.forEach(book => {
       let days = formatDays(book.date);
       let months = formatMonths(book.date);
-      if (`${book.date.getFullYear()}.${months}.${days}` == date) {
-        sortedBooks.push(book);
-      };
+      values.push(`${book.date.getFullYear()}.${months}.${days}`);
     });
-  });
+    let sortedValues = values.sort();
 
+    sortedValues.forEach(value => {
+      booksToSort.forEach(book => {
+        let days = formatDays(book.date);
+        let months = formatMonths(book.date);
+        if (`${book.date.getFullYear()}.${months}.${days}` == value) {
+          sortedBooks.push(book);
+        };
+      });
+    });
+  };
   renderBooks(sortedBooks);
 };
