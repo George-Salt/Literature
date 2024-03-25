@@ -40,11 +40,20 @@ function openCloseFilters() {
 };
 
 
+function resetFilters() {
+  let fromFilterInputs = document.querySelectorAll("main .filters .from .inputs input");
+  let subjectFilterInputs = document.querySelectorAll("main .filters .subject .inputs input");
+
+  fromFilterInputs.forEach(input => input.checked = false);
+  subjectFilterInputs.forEach(input => input.checked = false);
+};
+
+
 function renderBooksByFilters() {
   let fromFilterInputs = document.querySelectorAll("main .filters .from .inputs input");
   let subjectFilterInputs = document.querySelectorAll("main .filters .subject .inputs input");
-  let fromFilters = new Array;
-  let subjectFilters = new Array;
+  let fromFilters = new Array();
+  let subjectFilters = new Array();
 
   fromFilterInputs.forEach(input => {
     if (input.checked) {fromFilters.push(input.value)};
@@ -53,7 +62,7 @@ function renderBooksByFilters() {
     if (input.checked) {subjectFilters.push(input.value)};
   });
 
-  let booksByFilters = [];
+  let booksByFilters = new Array();
   if (fromFilters.length > 0 && subjectFilters.length > 0) {
     books.forEach(book => {
       fromFilters.forEach(fromFilter => {
@@ -64,8 +73,6 @@ function renderBooksByFilters() {
         });
       });
     });
-
-    renderBooks(booksByFilters);
   } else if (fromFilters.length > 0) {
     books.forEach(book => {
       fromFilters.forEach(fromFilter => {
@@ -74,8 +81,6 @@ function renderBooksByFilters() {
         };
       });
     });
-
-    renderBooks(booksByFilters);
   } else if (subjectFilters.length > 0) {
     books.forEach(book => {
       subjectFilters.forEach(subjectFilter => {
@@ -84,14 +89,14 @@ function renderBooksByFilters() {
         };
       });
     });
-
-    renderBooks(booksByFilters);
   } else {
-    renderBooks(books);
+    booksByFilters = books;
   };
 
   if (sortedMethod) {
     sortByParameter(sortedMethod)
+  } else {
+    renderBooks(booksByFilters);
   };
   return booksByFilters;
 };

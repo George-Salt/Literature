@@ -5,8 +5,8 @@ function sortByParameter(bookParameter) {
     booksToSort = booksByFilters;
   };
 
-  let values = [];
-  let sortedBooks = [];
+  let values = new Array();
+  let sortedBooks = new Array();
   if (bookParameter == "name") {
     sortedMethod = "name";
 

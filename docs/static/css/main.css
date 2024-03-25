@@ -424,4 +424,8 @@ main .books.list {
     max-width: 150px;
     max-height: 150px;
   }
+
+  main .books.list .book .subject {
+    display: none;
+  }
 }
