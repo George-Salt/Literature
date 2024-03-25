@@ -11,21 +11,22 @@ function renderFilters() {
 
   fromFilterContainer.innerHTML = "";
   fromValues.forEach(value => {
-    let checkboxElement = document.createElement("label");
-    checkboxElement.className = "checkbox";
-    checkboxElement.innerHTML = `<input type="checkbox" name="from" value="${value}" onchange="booksByFilters = renderBooksByFilters()"><span class="no-select">${value}</span>`;
-
-    fromFilterContainer.append(checkboxElement);
+    createCheckboxColumn("from", value);
   });
 
   subjectFilterContainer.innerHTML = "";
   subjectValues.forEach(value => {
-    let checkboxElement = document.createElement("label");
-    checkboxElement.className = "checkbox";
-    checkboxElement.innerHTML = `<input type="checkbox" name="from" value="${value}" onchange="booksByFilters = renderBooksByFilters()"><span class="no-select">${value}</span>`;
-
-    subjectFilterContainer.append(checkboxElement);
+    createCheckboxColumn("subject", value);
   });
+};
+
+
+function createCheckboxColumn(name, value) {
+  let checkboxElement = document.createElement("label");
+  checkboxElement.className = "checkbox";
+  checkboxElement.innerHTML = `<input type="checkbox" name="${name}" value="${value}" onchange="booksByFilters = renderBooksByFilters()"><span class="no-select">${value}</span>`;
+
+  subjectFilterContainer.append(checkboxElement);
 };
 
 
@@ -52,12 +53,13 @@ function resetFilters() {
 function renderBooksByFilters() {
   let fromFilterInputs = document.querySelectorAll("main .filters .from .inputs input");
   let subjectFilterInputs = document.querySelectorAll("main .filters .subject .inputs input");
-  let fromFilters = new Array();
-  let subjectFilters = new Array();
 
+  let fromFilters = new Array();
   fromFilterInputs.forEach(input => {
     if (input.checked) {fromFilters.push(input.value)};
   });
+
+  let subjectFilters = new Array();
   subjectFilterInputs.forEach(input => {
     if (input.checked) {subjectFilters.push(input.value)};
   });
@@ -93,10 +95,6 @@ function renderBooksByFilters() {
     booksByFilters = books;
   };
 
-  if (sortedMethod) {
-    sortByParameter(sortedMethod)
-  } else {
-    renderBooks(booksByFilters);
-  };
+  renderBooks(booksByFilters);
   return booksByFilters;
 };
