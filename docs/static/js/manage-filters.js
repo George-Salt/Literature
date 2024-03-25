@@ -11,22 +11,23 @@ function renderFilters() {
 
   fromFilterContainer.innerHTML = "";
   fromValues.forEach(value => {
-    createCheckboxColumn("from", value);
+    let checkboxElement = createCheckboxElement("from", value);
+    fromFilterContainer.append(checkboxElement);
   });
 
   subjectFilterContainer.innerHTML = "";
   subjectValues.forEach(value => {
-    createCheckboxColumn("subject", value);
+    let checkboxElement = createCheckboxElement("subject", value);
+    subjectFilterContainer.append(checkboxElement);
   });
 };
 
 
-function createCheckboxColumn(name, value) {
+function createCheckboxElement(name, value) {
   let checkboxElement = document.createElement("label");
   checkboxElement.className = "checkbox";
   checkboxElement.innerHTML = `<input type="checkbox" name="${name}" value="${value}" onchange="booksByFilters = renderBooksByFilters()"><span class="no-select">${value}</span>`;
-
-  subjectFilterContainer.append(checkboxElement);
+  return checkboxElement;
 };
 
 
