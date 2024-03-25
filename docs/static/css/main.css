@@ -395,7 +395,7 @@ main .books.list {
 
 /* COMBINED ADAPTIVITY */
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 915px) {
   main .setting + .setting {
     border-left: var(--border);
     padding-left: 15px;
@@ -415,7 +415,7 @@ main .books.list {
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 915px) {
   main .settings {
     flex-direction: column;
   }
