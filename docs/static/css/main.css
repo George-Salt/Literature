@@ -231,6 +231,7 @@ main .filters .checkbox {
 main .filters .checkbox > input {
   position: absolute;
   opacity: 0;
+  cursor: pointer;
 }
 
 main .filters .checkbox > span {
@@ -248,7 +249,8 @@ main .filters .checkbox > span::before {
 }
 
 main .filters .checkbox > input:not(:checked) + span:hover::before,
-main .filters .checkbox > input:active + span::before {
+main .filters .checkbox > input:active + span::before,
+main .filters .checkbox > input:not(:checked):hover + span::before {
   border-color: var(--blue-color);
 }
 
