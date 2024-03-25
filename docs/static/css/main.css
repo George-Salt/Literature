@@ -286,7 +286,7 @@ main .books.table .book img {
 }
 
 main .books.table .book .details {
-  margin: 10px 0;
+  margin-top: 10px;
 }
 
 /* LIST VIEW */
