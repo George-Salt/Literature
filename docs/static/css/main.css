@@ -63,15 +63,6 @@ body.popup::-webkit-scrollbar-thumb {
 }
 
 
-::-webkit-selection,
-::-ms-selection,
-::selection,
-::-moz-selection,
-::-o-selection {
-  background: var(--blue-color);
-}
-
-
 h1, h2, h3, h4, h5, h6 {
   font-family: "Unbounded", sans-serif;
 }
@@ -136,6 +127,7 @@ main .popup {
   width: 100%;
   height: 100%;
   background: var(--shading-color);
+  backdrop-filter: blur(10px);
 }
 
 body.popup main .popup {
