@@ -10,6 +10,8 @@
   <link rel="icon" href="static/img/icon.png">
 
   <link href="static/css/main.css" rel="stylesheet" type="text/css" />
+  <link href="static/css/adaptivity.css" rel="stylesheet" type="text/css" />
+  <link href="static/css/checkbox.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -33,11 +35,15 @@
         <div class="setting row">
           <div class="view button table" onclick="setTableView()">Таблица</div>
           <div class="view button list" onclick="setListView()">Список</div>
-          <div class="view button print" onclick="setPrintView()">Печать</div>
+        </div>
+
+        <div class="setting row">
+          <div class="print button" onclick="setPrintView()">Печать</div>
         </div>
 
         <div class="setting row">
           <div class="filter button" onclick="openCloseFilters()">Фильтры ▾</div>
+          <div class="display button" onclick="openCloseDisplay()">Отображение ▾</div>
         </div>
       </div>
 
@@ -53,6 +59,11 @@
         </div>
       </div>
 
+      <div class="block displays column">
+        <h2>Отображение</h2>
+        <div class="inputs column"></div>
+      </div>
+
       <div class="block books row"></div>
     </div>
   </main>
@@ -60,6 +71,8 @@
   <script src="static/js/books.js"></script>
   <script src="static/js/date-formating.js"></script>
   <script src="static/js/filtering.js"></script>
+  <script src="static/js/info-display.js"></script>
+  <script src="static/js/loading.js"></script>
   <script src="static/js/local-storage.js"></script>
   <script src="static/js/popup.js"></script>
   <script src="static/js/sorting.js"></script>
@@ -67,24 +80,29 @@
   <script>
     let body = document.body;
     let container = document.querySelector("main .container");
+
+    let popupImage = document.querySelector("main .popup img");
+
     let booksContainer = document.querySelector("main .books");
+
     let settingsContainer = document.querySelector("main .settings");
     let tableViewButton = document.querySelector("main .view.table");
     let listViewButton = document.querySelector("main .view.list");
-    let printViewButton = document.querySelector("main .view.print");
-    let popupImage = document.querySelector("main .popup img");
+    let printButton = document.querySelector("main .print");
+
     let filtersContainer = document.querySelector("main .filters");
     let openCloseFiltersButton = document.querySelector("main .settings .filter");
     let fromFilterContainer = document.querySelector("main .filters .from .inputs");
     let subjectFilterContainer = document.querySelector("main .filters .subject .inputs");
 
-    let sortedMethod = "";
+    let displaysContainer = document.querySelector("main .displays");
+    let openCloseDisplayButton = document.querySelector("main .settings .display");
+    let displayInputsContainer = document.querySelector("main .displays .inputs");
+
     let booksByFilters = new Array();
     let books = getBooks();
 
-    renderBooks(books);
-    renderFilters();
-    setTableView();
+    renderPage();
   </script>
 </body>
 

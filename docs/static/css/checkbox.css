@@ -1,0 +1,41 @@
+
+.checkbox {
+  width: max-content;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.checkbox > input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox > span {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox > span::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: var(--border);
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.checkbox > input:not(:checked) + span:hover::before,
+.checkbox > input:active + span::before,
+.checkbox > input:not(:checked):hover + span::before {
+  border-color: var(--blue-color);
+}
+
+.checkbox > input:active + span::before {
+  background: var(--element-color);
+}
+
+.checkbox > input:checked + span::before {
+  border-color: var(--blue-color);
+  background: var(--blue-color);
+}

@@ -1,7 +1,7 @@
 
 function renderFilters() {
-  let fromValues = new Array;
-  let subjectValues = new Array;
+  let fromValues = new Array();
+  let subjectValues = new Array();
   books.forEach(book => {
     fromValues.push(book.from);
     subjectValues.push(book.subject);
@@ -11,19 +11,19 @@ function renderFilters() {
 
   fromFilterContainer.innerHTML = "";
   fromValues.forEach(value => {
-    let checkboxElement = createCheckboxElement("from", value);
+    let checkboxElement = createFilterCheckboxElement("from", value);
     fromFilterContainer.append(checkboxElement);
   });
 
   subjectFilterContainer.innerHTML = "";
   subjectValues.forEach(value => {
-    let checkboxElement = createCheckboxElement("subject", value);
+    let checkboxElement = createFilterCheckboxElement("subject", value);
     subjectFilterContainer.append(checkboxElement);
   });
 };
 
 
-function createCheckboxElement(name, value) {
+function createFilterCheckboxElement(name, value) {
   let checkboxElement = document.createElement("label");
   checkboxElement.className = "checkbox";
   checkboxElement.innerHTML = `<input type="checkbox" name="${name}" value="${value}" onchange="booksByFilters = renderBooksByFilters()"><span class="no-select">${value}</span>`;
@@ -31,13 +31,23 @@ function createCheckboxElement(name, value) {
 };
 
 
+function openFilters() {
+  openCloseFiltersButton.textContent = "Фильтры ▴";
+  filtersContainer.classList.add("active");
+};
+
+
+function closeFilters() {
+  openCloseFiltersButton.textContent = "Фильтры ▾";
+  filtersContainer.classList.remove("active");
+};
+
+
 function openCloseFilters() {
   if (filtersContainer.classList.contains("active")) {
-    openCloseFiltersButton.textContent = "Фильтры ▾";
-    filtersContainer.classList.remove("active");
+    closeFilters()
   } else {
-    openCloseFiltersButton.textContent = "Фильтры ▴";
-    filtersContainer.classList.add("active");
+    openFilters();
   };
 };
 

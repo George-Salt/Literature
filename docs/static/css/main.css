@@ -67,6 +67,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Unbounded", sans-serif;
 }
 
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
 
 .no-drag,
 .no-select {
@@ -103,6 +109,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .button:active {
   background: var(--element-hover-color);
+}
+
+.none {
+  display: none;
 }
 
 
@@ -165,7 +175,7 @@ main .settings {
 }
 
 main .setting {
-  gap: 15px;
+  gap: 10px;
   min-width: max-content;
 }
 
@@ -206,57 +216,18 @@ main .settings .sort.alphabet:active {
 }
 
 
-main .filters {
+main .filters,
+main .displays {
   display: none;
 }
 
-main .filters.active {
+main .filters.active,
+main .displays.active {
   display: flex;
 }
 
 main .filters .column + .column {
   margin-left: 25px;
-}
-
-main .filters .checkbox {
-  width: max-content;
-  margin-top: 5px;
-  cursor: pointer;
-}
-
-main .filters .checkbox > input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-main .filters .checkbox > span {
-  display: flex;
-  align-items: center;
-}
-
-main .filters .checkbox > span::before {
-  content: '';
-  width: 16px;
-  height: 16px;
-  border: var(--border);
-  border-radius: 5px;
-  margin-right: 5px;
-}
-
-main .filters .checkbox > input:not(:checked) + span:hover::before,
-main .filters .checkbox > input:active + span::before,
-main .filters .checkbox > input:not(:checked):hover + span::before {
-  border-color: var(--blue-color);
-}
-
-main .filters .checkbox > input:active + span::before {
-  background: var(--element-color);
-}
-
-main .filters .checkbox > input:checked + span::before {
-  border-color: var(--blue-color);
-  background: var(--blue-color);
 }
 
 
@@ -295,6 +266,21 @@ main .books.list .book .details {
 }
 
 main .books.list .book .details > * + * {
+  padding-left: 10px;
+  border-left: var(--border);
+}
+
+main .books.list .book .details > *.none + * {
+  padding: 0;
+  border: none;
+}
+
+main .books.list .book .details > *:not(.none) + *.none + *.none + *:not(.none) {
+  padding-left: 10px;
+  border-left: var(--border);
+}
+
+main .books.list .book .details > *:not(.none) + *.none + *:not(.none) {
   padding-left: 10px;
   border-left: var(--border);
 }
@@ -338,92 +324,4 @@ main .books.print .book img {
 main .books.table,
 main .books.list {
   gap: var(--interblock-margin);
-}
-
-/* ADAPTIVITY */
-
-@media screen and (min-width: 1600px) {
-  :root {
-    --books-in-row: 3;
-  }
-}
-
-@media screen and (min-width: 1100px) and (max-width: 1600px) {
-  :root {
-    --books-in-row: 2;
-  }
-}
-
-@media screen and (min-width: 450px) and (max-width: 600px) {
-  :root {
-    --border-margin: 25px;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  :root {
-    --border-margin: 15px;
-  }
-
-  main .books.table,
-  main .books.list,
-  main .books.table .book,
-  main .books.list .book {
-    gap: 15px;
-  }
-
-  main .books.table .book {
-    width: 100%;
-    background: none;
-    padding: 0;
-    border-radius: 0;
-  }
-
-  main .books.table .book + .book {
-    border-top: var(--border);
-    padding-top: 15px;
-  }
-
-  main .books.list .book {
-    padding: 15px;
-  }
-}
-
-/* COMBINED ADAPTIVITY */
-
-@media screen and (min-width: 915px) {
-  main .setting + .setting {
-    border-left: var(--border);
-    padding-left: 15px;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  main .books.table .book img {
-    max-width: 250px;
-    max-height: 250px;
-  }
-}
-
-@media screen and (max-width: 1100px) {
-  :root {
-    --books-in-row: 1;
-  }
-}
-
-@media screen and (max-width: 915px) {
-  main .settings {
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  main .books.table .book img {
-    max-width: 150px;
-    max-height: 150px;
-  }
-
-  main .books.list .book .subject {
-    display: none;
-  }
 }

@@ -8,23 +8,8 @@ function sortByParameter(bookParameter) {
   let values = new Array();
   let sortedBooks = new Array();
   if (bookParameter == "name") {
-    sortedMethod = "name";
-
-    booksToSort.forEach(book => {
-      values.push(book.name);
-    });
-    let sortedValues = values.sort();
-
-    sortedValues.forEach(value => {
-      booksToSort.forEach(book => {
-        if (book.name == value) {
-          sortedBooks.push(book);
-        };
-      });
-    });
+    sortedBooks = booksToSort.sort((a, b) => a.name.localeCompare(b.name));
   } else if (bookParameter == "date") {
-    sortedMethod = "date";
-
     booksToSort.forEach(book => {
       let days = formatDays(book.date);
       let months = formatMonths(book.date);
