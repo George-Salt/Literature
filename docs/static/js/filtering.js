@@ -42,15 +42,6 @@ function openCloseFilters() {
 };
 
 
-function resetFilters() {
-  let fromFilterInputs = document.querySelectorAll("main .filters .from .inputs input");
-  let subjectFilterInputs = document.querySelectorAll("main .filters .subject .inputs input");
-
-  fromFilterInputs.forEach(input => input.checked = false);
-  subjectFilterInputs.forEach(input => input.checked = false);
-};
-
-
 function renderBooksByFilters() {
   let fromFilterInputs = document.querySelectorAll("main .filters .from .inputs input");
   let subjectFilterInputs = document.querySelectorAll("main .filters .subject .inputs input");

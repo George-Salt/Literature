@@ -15,10 +15,10 @@
 <body>
   <main>
     <div class="popup center" onclick="closePopup()">
-      <img class="no-drag" src="static/img/Капитанская дочка.png">
+      <img class="no-drag" src="">
     </div>
 
-    <div class="container">
+    <div class="container column">
       <div class="block cover">
         <h1>Моя литература</h1>
         <p>Перечень книг для&nbsp;прочтения и управления&nbsp;ими</p>
@@ -33,7 +33,7 @@
         <div class="setting row">
           <div class="view button table" onclick="setTableView()">Таблица</div>
           <div class="view button list" onclick="setListView()">Список</div>
-          <div class="view button compact" onclick="setCompactView()">Компактно</div>
+          <div class="view button print" onclick="setPrintView()">Печать</div>
         </div>
 
         <div class="setting row">
@@ -44,13 +44,11 @@
       <div class="block filters">
         <div class="filter from column">
           <h2>Источник</h2>
-
           <div class="inputs column"></div>
         </div>
 
         <div class="filter subject column">
           <h2>Предмет</h2>
-
           <div class="inputs column"></div>
         </div>
       </div>
@@ -60,18 +58,20 @@
   </main>
 
   <script src="static/js/books.js"></script>
-  <script src="static/js/format-date.js"></script>
-  <script src="static/js/manage-books-view.js"></script>
-  <script src="static/js/manage-filters.js"></script>
-  <script src="static/js/manage-popup.js"></script>
-  <script src="static/js/render-books.js"></script>
-  <script src="static/js/sort-books.js"></script>
+  <script src="static/js/date-formating.js"></script>
+  <script src="static/js/filtering.js"></script>
+  <script src="static/js/local-storage.js"></script>
+  <script src="static/js/popup.js"></script>
+  <script src="static/js/sorting.js"></script>
+  <script src="static/js/view.js"></script>
   <script>
     let body = document.body;
+    let container = document.querySelector("main .container");
     let booksContainer = document.querySelector("main .books");
+    let settingsContainer = document.querySelector("main .settings");
     let tableViewButton = document.querySelector("main .view.table");
     let listViewButton = document.querySelector("main .view.list");
-    let compactViewButton = document.querySelector("main .view.compact");
+    let printViewButton = document.querySelector("main .view.print");
     let popupImage = document.querySelector("main .popup img");
     let filtersContainer = document.querySelector("main .filters");
     let openCloseFiltersButton = document.querySelector("main .settings .filter");
