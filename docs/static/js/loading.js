@@ -9,6 +9,6 @@ function renderPage() {
   };
 
   renderBooks(books);
-  renderFilters();
   renderDisplay();
+  renderFilters();
 };

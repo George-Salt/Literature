@@ -10,7 +10,7 @@ let displayParameters = [
 
 function renderDisplay() {
   let checkedDisplayParameters = new String();
-  if (getData("displayParameters").split(",")) {
+  if (getData("displayParameters")) {
     checkedDisplayParameters = getData("displayParameters").split(",");
   } else {
     checkedDisplayParameters = displayParameters;

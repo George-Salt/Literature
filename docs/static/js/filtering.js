@@ -9,17 +9,39 @@ function renderFilters() {
   fromValues = Array.from(new Set(fromValues));
   subjectValues = Array.from(new Set(subjectValues));
 
+  let checkedFromFiltersParameters = new Array();
+  if (getData("fromFilters")) {
+    checkedFromFiltersParameters = getData("fromFilters").split(",");
+  };
+
+  let checkedSubjectFiltersParameters = new Array();
+  if (getData("subjectFilters")) {
+    checkedSubjectFiltersParameters = getData("subjectFilters").split(",");
+  };
+
   fromFilterContainer.innerHTML = "";
   fromValues.forEach(value => {
     let checkboxElement = createFilterCheckboxElement("from", value);
+
+    if (checkedFromFiltersParameters.includes(value)) {
+      let checkbox = checkboxElement.querySelector("input");
+      checkbox.checked = true;
+    };
     fromFilterContainer.append(checkboxElement);
   });
 
   subjectFilterContainer.innerHTML = "";
   subjectValues.forEach(value => {
     let checkboxElement = createFilterCheckboxElement("subject", value);
+
+    if (checkedSubjectFiltersParameters.includes(value)) {
+      let checkbox = checkboxElement.querySelector("input");
+      checkbox.checked = true;
+    };
     subjectFilterContainer.append(checkboxElement);
   });
+
+  renderBooksByFilters();
 };
 
 
@@ -97,6 +119,9 @@ function renderBooksByFilters() {
     booksByFilters = books;
   };
 
+  saveData("fromFilters", fromFilters);
+  saveData("subjectFilters", subjectFilters);
   renderBooks(booksByFilters);
+  renderBooksWithDisplay();
   return booksByFilters;
 };
