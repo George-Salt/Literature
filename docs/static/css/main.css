@@ -141,7 +141,8 @@ main .container.print {
 
 main .container.print .cover p,
 main .container.print .settings,
-main .container.print .filters {
+main .container.print .filters,
+main .container.print .displays {
   display: none;
 }
 
